@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Workout Project</title>
+</head>
+
+<body>
+    <div id="main_container">
+        <h1>Workout Project</h1>
+        <div id="intro">
+            <p>Prêt pour l'entraînement ?</p>
+            <button id="introButton">OUI</button>
+        </div>
+        <div id="instruction">
+            <form>
+                <p>
+                    <p>Commence par définir ton objectif ...</p>
+                    <label for="setNbOfExo">Combien d'exercice ? </label>
+                    <input type="number" name="setNbOfExo" id="setNbOfExo" min="1" max="20" step="1" required /> <br />
+                    <label for="setExoTime">Combien de temps par exercice ? </label>
+                    <input type="time" name="setExoTime" id="setExoTime" required /> <br />
+                    <label for="setRestTime">Combien de repos par exercice ? </label>
+                    <input type="time" name="setRestTime" id="setRestTime" required /> <br />
+                    <label for="setNbSeries">Combien de série ? </label>
+                    <input type="number" name="setNbSeries" id="setNbSeries" min="1" max="20" step="1" required /> <br />
+                </p>
+            </form>
+            <button id="goButton">C'est parti !</button>
+        </div>
+        <div id="main_screen">
+            <div id="timer">00'00''</div>
+            <div id="exoTime">00'00''</div>
+            <div id="restTime">00'00''</div>
+            <div id="nbSerie">SERIE 0/0</div>
+            <div id="nbExo">EXERCICE 0/0</div>
+            <div>
+                <button id="startStopButton">START</button>
+            </div>
+            <div id="time">00'00''</div>
+            <div>
+                <button id="resetButton">RESET</button>
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../js/app.js"></script>
+</body>
+
+</html>
