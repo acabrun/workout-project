@@ -1,0 +1,96 @@
+#main_container {
+	text-align: center;
+}
+
+h1 {
+	background-color: #47A7EE;
+	color: white;
+	font-size: 35px;
+	font-weight: 800;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: 80px;
+	margin-right: 80px;
+	border-radius: 20px;
+	text-shadow: 1px 1px 1px black;
+
+}
+
+p {
+	font-size: 20px;
+	font-weight: 800;
+	color: #47A7EE;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+#introButton {
+	background-color: #54EE47;
+	border-radius: 15px;
+	border: none;
+	color: white;
+	font-weight: 800;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-size: 15px;
+	text-shadow: 1px 1px 1px black;
+}
+
+#goButton {
+	background-color: #54EE47;
+	border-radius: 15px;
+	border: none;
+	color: white;
+	font-weight: 800;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-size: 15px;
+	text-shadow: 1px 1px 1px black;
+}
+
+#startStopButton {
+	background-color: #54EE47;
+	border-radius: 15px;
+	border: none;
+	color: white;
+	font-weight: 800;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-size: 15px;
+	text-shadow: 1px 1px 1px black;
+}
+
+#resetButton {
+	background-color: #E247EE;
+	border-radius: 15px;
+	border: none;
+	color: white;
+	font-weight: 800;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-size: 15px;
+	text-shadow: 1px 1px 1px black;
+}
+
+label {
+
+}
+
+input, label {
+	box-sizing: border-box;
+}
+

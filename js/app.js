@@ -4,12 +4,14 @@
 $('#instruction').hide();
 $('#main_screen').hide();
 
-let audio
-/*timer,
+let audio,
+timer,
 exoTime,
 restTime,
 nbSerie,
-nbExo;*/
+nbExo,
+currentExo,
+currentSerie;
 
 $('#introButton').on('click', function() {
     $('#intro').slideToggle();
@@ -21,18 +23,41 @@ $('#goButton').on('click', function() {
     $('#main_screen').slideToggle();
 })
 
-/*$('#setExoTime').on('blur', function(e) {
-    $('#exoTime').text(e.target.value);
-})*/
 
-function setGoal(goal, display) {
+// initialization goal time
+function setGoalTime(goal, display) {
+    
     $(goal).on('blur', function(e) {
-    	console.log('test');
-        $(display).text(e.target.value);
+        
+        if (goal === '#setExoTime') {
+            exoTime = e.target.value;
+            $(display).text(exoTime);
+        } else {
+            restTime = e.target.value;
+            $(display).text(restTime);
+        }
     })
 }
 
-setGoal('#setExoTime', '#exoTime');
-setGoal('#setNbOfExo', '#nbExo');
-setGoal('#setRestTime', '#restTime');
-setGoal('#setNbSeries', '#nbSerie');
+// initialization goal exo & series
+function setGoalExo(goal, display) {
+    
+    $(goal).on('blur', function(e) {
+        
+        if (goal === '#setNbSeries') {
+            nbSerie = e.target.value;
+            currentSerie = 1;
+            $(display).text(currentSerie + '/' + nbSerie);
+        } else {
+            nbExo = e.target.value;
+            currentExo = 1;
+            $(display).text(currentExo + '/' + nbExo);
+        }
+    })
+}
+
+setGoalTime('#setExoTime', '#exoTime');
+setGoalTime('#setRestTime', '#restTime');
+
+setGoalExo('#setNbSeries', '#nbSerie');
+setGoalExo('#setNbOfExo', '#nbExo');
