@@ -1,5 +1,9 @@
 #main_container {
 	text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* width: 500px; */
+    align-items: center;
 }
 
 h1 {
@@ -94,3 +98,35 @@ input, label {
 	box-sizing: border-box;
 }
 
+#main_screen_container {
+	display: flex;
+	flex-direction: column;
+} 
+
+#timer {
+	padding-bottom: 20px;
+}
+
+#exo_rest_time {
+	display: flex;
+	justify-content: space-around;
+}
+
+#serie_exo_session {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 25px;
+}
+
+#time {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#main_screen_footer {
+	display: flex;
+	justify-content: space-around;
+	align-items: baseline;
+	padding-top: 50px;
+}

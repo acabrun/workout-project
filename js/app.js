@@ -1,8 +1,8 @@
 /*chargement du son*/
 
 
-$('#instruction').hide();
-$('#main_screen').hide();
+//$('#instruction').hide();
+//$('#main_screen').hide();
 
 let audio,
 timer,

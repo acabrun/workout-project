@@ -14,7 +14,7 @@
             <p>Prêt pour l'entraînement ?</p>
             <button id="introButton">OUI</button>
         </div>
-        <div id="instruction">
+        <div id="instruction" hidden>
             <form>
                 <p>
                     <p>Commence par définir ton objectif ...</p>
@@ -30,18 +30,22 @@
             </form>
             <button id="goButton">C'est parti !</button>
         </div>
-        <div id="main_screen">
-            <div id="timer">00'00''</div>
-            <div id="exoTime">00'00''</div>
-            <div id="restTime">00'00''</div>
-            <div id="nbSerie">SERIE 0/0</div>
-            <div id="nbExo">EXERCICE 0/0</div>
-            <div>
-                <button id="startStopButton">START</button>
-            </div>
-            <div id="time">00'00''</div>
-            <div>
-                <button id="resetButton">RESET</button>
+        <div id="main_screen" hidden >
+            <div id="main_screen_container">
+                <div id="timer">00'00''</div>
+                <div id="exo_rest_time">
+                    <div id="exoTime">00'00''</div>
+                    <div id="restTime">00'00''</div>
+                </div>
+                <div id="serie_exo_session">
+                    <div id="nbSerie">SERIE 0/0</div>
+                    <div id="nbExo">EXERCICE 0/0</div>
+                </div>
+                <div id="main_screen_footer">
+                    <button id="startStopButton">START</button>
+                    <div id="time">00'00''</div>
+                    <button id="resetButton">RESET</button>
+                </div>
             </div>
         </div>
     </div>
