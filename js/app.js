@@ -1,17 +1,13 @@
 /*chargement du son*/
 
-
-//$('#instruction').hide();
-//$('#main_screen').hide();
-
 let audio,
-timer,
 exoTime,
 restTime,
 nbSerie,
 nbExo,
 currentExo,
-currentSerie;
+currentSerie,
+currentTime;
 
 $('#introButton').on('click', function() {
     $('#intro').slideToggle();
@@ -61,3 +57,66 @@ setGoalTime('#setRestTime', '#restTime');
 
 setGoalExo('#setNbSeries', '#nbSerie');
 setGoalExo('#setNbOfExo', '#nbExo');
+
+
+// display current time
+function displayCurrentTime() {
+    let date = new Date();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    currentTime = h + 'h' + m;
+    $('#currentTime').text(currentTime);
+}
+displayCurrentTime();
+setInterval(displayCurrentTime, 15000);
+
+// timer
+function timer() {
+    let s = 0,
+        m = 0;
+    setInterval(function() {
+        s += 1;
+        if (s<60) {
+            $('#timer').text(m + "'" + s + '"')
+        }else if(s===60) {
+            s=0;
+            m += 1;
+            $('#timer').text(m + "'" + s + '"');
+        }
+
+    }, 1000)
+}
+
+// countdown    
+function countdown(typeOfTimer) {
+    let timeArray = typeOfTimer.split(':');
+    let m = timeArray[0];
+    let s = timeArray[1];
+    console.log(m +' et '+s);
+
+    setInterval(function() {
+        s -= 1;
+        if (s>0) {
+            $('#exoTime').text(m + "'" + s + '"')
+        }else if (s===0) {
+            s = 59;
+            m -= 1;
+            $('#exoTime').text(m + "'" + s + '"')
+        }
+
+    }, 1000)
+}
+
+ 
+
+
+// start/stop button
+$('#startStopButton').on('click', function() {
+    timer();
+    countdown(exoTime);
+})
+
+
+
+
+
