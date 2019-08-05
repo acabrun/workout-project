@@ -8,8 +8,10 @@ let audio,
     currentExo,
     currentSerie,
     currentTime,
+    currentTimer = 0,
     timerID,
-    timerExoID;
+    timerExoID,
+    timerRestID;
 
 $('#introButton').on('click', function() {
     $('#intro').slideToggle();
@@ -93,7 +95,7 @@ function timer() {
 }
 
 // -------------------------COUNTDOWN ----------A REFAIRE TOTALEMENT-------------------------
-let timeArray, mCountdown, sCountdown; 
+/* let timeArray, mCountdown, sCountdown; 
 
 function countdown(typeOfTimer, yet) {  // yet param is used to keep countdown after call startStopButton
                                         // without initialization
@@ -113,14 +115,14 @@ function countdown(typeOfTimer, yet) {  // yet param is used to keep countdown a
                 
                 if (sCountdown > 0 && mCountdown>=0) {
                     sCountdown -= 1;
-                    $('#exoTime').text(mCountdown + "'" + sCountdown + '"')
+                    $('#exoTime').text(mCountdown + "'" + sCountdown + '"') // change $('#exoTime') by $(typeOfTimer)
                 } else if (sCountdown === 0 && mCountdown>0) {
                     sCountdown = 59;
                     mCountdown -= 1;
                     $('#exoTime').text(mCountdown + "'" + sCountdown + '"')
-                }else if (sCountdown === 0 && mCountdown === 0) {
+                }else if (sCountdown === 0 && (mCountdown === 0 || mCountdown === '00') ) { //changement à tester
                     console.log(typeOfTimer)
-                    if (typeOfTimer === exoTime) {
+                    if (typeOfTimer === exoTime) {  // typeOfTimer === 00:10 (par exemple)
                         countdown(restTime, false)
                     } else if (typeOfTimer === restTime) {
                         if (currentExo === nbExo) {
@@ -169,26 +171,145 @@ function countdown(typeOfTimer, yet) {  // yet param is used to keep countdown a
         }
 
     }
-}
+}  */
+
+//-------------------------------------------------------------------------------------
+//-----------------------------function countdown version II---------------------------
+
+let timeArrayExo, mCountdownExo, sCountdownExo;
+
+function countdownExo(yet) {
+    currentTimer = 0 // identify which timer is running
+
+    switch (yet) {
+        case false: // initialization
+            timeArrayExo = exoTime.split(':');
+            mCountdownExo = timeArrayExo[0];
+            sCountdownExo = timeArrayExo[1];
+
+            timerExoID = setInterval(function(){
+                if (sCountdownExo > 0 && mCountdownExo >= 0) {
+                    sCountdownExo -= 1;
+                    $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"') 
+                } else if (sCountdownExo === 0 && mCountdownExo > 0) {
+                    sCountdownExo = 59;
+                    mCountdownExo -= 1;
+                    $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"')
+                } else if (sCountdownExo === 0 && (mCountdownExo === 0 || mCountdownExo === '00') ) {
+                    countdownRest(false);
+                    clearInterval(timerExoID);
+                }
+            }, 1000);
+            break;
+
+        case true: // none initialization
+            timerExoID = setInterval(function(){
+                if (sCountdownExo > 0 && mCountdownExo >= 0) {
+                    sCountdownExo -= 1;
+                    $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"') 
+                } else if (sCountdownExo === 0 && mCountdownExo > 0) {
+                    sCountdownExo = 59;
+                    mCountdownExo -= 1;
+                    $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"')
+                } else if (sCountdownExo === 0 && (mCountdownExo === 0 || mCountdownExo === '00') ) {
+                    countdownRest(false);
+                    clearInterval(timerExoID);
+                }
+            }, 1000);
+            break;
+
+        default:
+            return console.log('switch error from exo countdown function');
+    }
+} 
+                       //-----------------------------------
+
+let timeArrayRest, mCountdownRest, sCountdownRest;
+
+function countdownRest(yet) {
+    currentTimer = 1 // identify which timer is running
+
+    switch (yet) {
+        case false: // initialization
+            timeArrayRest = restTime.split(':');
+            mCountdownRest = timeArrayRest[0];
+            sCountdownRest = timeArrayRest[1];
+
+            timerRestID = setInterval(function(){
+                if (sCountdownRest > 0 && mCountdownRest >= 0) {
+                    sCountdownRest -= 1;
+                    $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"') 
+                } else if (sCountdownRest === 0 && mCountdownRest > 0) {
+                    sCountdownRest = 59;
+                    mCountdownRest -= 1;
+                    $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"')
+                } else if (sCountdownRest === 0 && (mCountdownRest === 0 || mCountdownRest === '00') ) {
+                    countdownExo(false);
+                    clearInterval(timerRestID);
+                    console.log('end of exo '+ currentExo)
+                }
+            }, 1000);
+            break;
+
+        case true: // none initialization
+            timerRestID = setInterval(function(){
+                if (sCountdownRest > 0 && mCountdownRest >= 0) {
+                    sCountdownRest -= 1;
+                    $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"') 
+                } else if (sCountdownRest === 0 && mCountdownRest > 0) {
+                    sCountdownRest = 59;
+                    mCountdownRest -= 1;
+                    $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"')
+                } else if (sCountdownRest === 0 && (mCountdownRest === 0 || mCountdownRest === '00') ) {
+                    countdownExo(false);
+                    clearInterval(timerRestID);
+                    console.log('end of exo '+ currentExo)
+                }
+            }, 1000);
+            break;
+
+        default:
+            return console.log('switch error from exo countdown function');
+    }
+} 
+
 
 // ---------------------------start/stop button----------------------------------------
 let nbClick = 0;
 $('#startStopButton').on('click', function() {
     nbClick += 1;
 
-    if (nbClick % 2 === 0) {
+    if (nbClick % 2 === 0) { // STOP FUNCTION 
         $('#startStopButton').text('START');
         $('#startStopButton').css("background-color", "#54EE47");
         clearInterval(timerID);
-        clearInterval(timerExoID);
-    } else {
+        switch (currentTimer) {
+                case 0 : // exo timer is running
+                    clearInterval(timerExoID);
+                    break;
+
+                case 1 : // rest timer is running
+                    clearInterval(timerRestID);
+                    break;
+            }
+
+    } else { // START FUNCTION
         $('#startStopButton').text('STOP');
         $('#startStopButton').css("background-color", "red");
         timer();
-        if (nbClick === 1) {
-            countdown(exoTime, false);
+        if (nbClick === 1) { 
+            countdownExo(false);
         } else {
-            countdown(exoTime, true);
+            switch (currentTimer) {
+                case 0 : // exo timer is running
+                    countdownExo(true);
+                    break;
+
+                case 1 : // rest timer is running
+                    countdownRest(true);
+                    break;
+            }
+           
         }
         
     }
