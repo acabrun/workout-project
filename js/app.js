@@ -47,11 +47,11 @@ function setGoalExo(goal, display) {
         if (goal === '#setNbSeries') {
             nbSerie = e.target.value;
             currentSerie = 1;
-            $(display).text(currentSerie + '/' + nbSerie);
+            $(display).text('Série : ' + currentSerie + '/' + nbSerie);
         } else {
             nbExo = e.target.value;
             currentExo = 1;
-            $(display).text(currentExo + '/' + nbExo);
+            $(display).text('Exo : ' + currentExo + '/' + nbExo);
         }
     })
 }
@@ -196,8 +196,14 @@ function countdownExo(yet) {
                     mCountdownExo -= 1;
                     $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"')
                 } else if (sCountdownExo === 0 && (mCountdownExo === 0 || mCountdownExo === '00') ) {
-                    countdownRest(false);
-                    clearInterval(timerExoID);
+                    if (currentExo === parseInt(nbExo, 10) && currentSerie === parseInt(nbSerie, 10)) {
+                        console.log('End of WOD');
+                        clearInterval(timerID)
+                        clearInterval(timerExoID);
+                    } else {
+                        countdownRest(false);
+                        clearInterval(timerExoID);
+                    }
                 }
             }, 1000);
             break;
@@ -212,8 +218,14 @@ function countdownExo(yet) {
                     mCountdownExo -= 1;
                     $('#exoTime').text(mCountdownExo + "'" + sCountdownExo + '"')
                 } else if (sCountdownExo === 0 && (mCountdownExo === 0 || mCountdownExo === '00') ) {
-                    countdownRest(false);
-                    clearInterval(timerExoID);
+                    if (currentExo === parseInt(nbExo, 10) && currentSerie === parseInt(nbSerie, 10)) {
+                        console.log('End of WOD');
+                        clearInterval(timerID)
+                        clearInterval(timerExoID);
+                    } else {
+                        countdownRest(false);
+                        clearInterval(timerExoID);
+                    }
                 }
             }, 1000);
             break;
@@ -230,6 +242,7 @@ function countdownRest(yet) {
     currentTimer = 1 // identify which timer is running
 
     switch (yet) {
+
         case false: // initialization
             timeArrayRest = restTime.split(':');
             mCountdownRest = timeArrayRest[0];
@@ -244,9 +257,22 @@ function countdownRest(yet) {
                     mCountdownRest -= 1;
                     $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"')
                 } else if (sCountdownRest === 0 && (mCountdownRest === 0 || mCountdownRest === '00') ) {
-                    countdownExo(false);
-                    clearInterval(timerRestID);
-                    console.log('end of exo '+ currentExo)
+                    if (currentExo === parseInt(nbExo, 10)) { // serie of exo over
+                        console.log('end of exo '+ currentExo + ' of serie '+ currentSerie )
+                        currentExo = 1;
+                        currentSerie += 1;
+                        $('#nbSerie').text('Série : ' + currentSerie + '/' + nbSerie);
+                        $('#nbExo').text('Exo : ' + currentExo + '/' + nbExo);
+                        countdownExo(false);
+                        clearInterval(timerRestID);
+                    } else { // one more exo over
+                        console.log('end of exo '+ currentExo + ' of serie '+ currentSerie )
+                        currentExo += 1;
+                        $('#nbSerie').text('Série : ' + currentSerie + '/' + nbSerie);
+                        $('#nbExo').text('Exo : ' + currentExo + '/' + nbExo);
+                        countdownExo(false);
+                        clearInterval(timerRestID);
+                    }
                 }
             }, 1000);
             break;
@@ -261,9 +287,22 @@ function countdownRest(yet) {
                     mCountdownRest -= 1;
                     $('#restTime').text(mCountdownRest + "'" + sCountdownRest + '"')
                 } else if (sCountdownRest === 0 && (mCountdownRest === 0 || mCountdownRest === '00') ) {
-                    countdownExo(false);
-                    clearInterval(timerRestID);
-                    console.log('end of exo '+ currentExo)
+                    if (currentExo === parseInt(nbExo, 10)) { // serie of exo over
+                        console.log('end of exo '+ currentExo + ' of serie '+ currentSerie )
+                        currentExo = 1;
+                        currentSerie += 1;
+                        $('#nbSerie').text('Série : ' + currentSerie + '/' + nbSerie);
+                        $('#nbExo').text('Exo : ' + currentExo + '/' + nbExo);
+                        countdownExo(false);
+                        clearInterval(timerRestID);
+                    } else { // one more exo over
+                        console.log('end of exo '+ currentExo + ' of serie '+ currentSerie )
+                        currentExo += 1;
+                        $('#nbSerie').text('Série : ' + currentSerie + '/' + nbSerie);
+                        $('#nbExo').text('Exo : ' + currentExo + '/' + nbExo);
+                        countdownExo(false);
+                        clearInterval(timerRestID);
+                    }
                 }
             }, 1000);
             break;
